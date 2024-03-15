@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 interface Param {
   id: number;
   name: string;
-  type: "string";
+  type: 'string';
 }
 
 interface ParamValue {
@@ -14,42 +14,6 @@ interface ParamValue {
 interface Model {
   paramValues: ParamValue[];
 }
-
-const App: React.FC = () => {
-  const params: Param[] = [
-    {
-      id: 1,
-      name: "Назначение",
-      type: "string",
-    },
-    {
-      id: 2,
-      name: "Длина",
-      type: "string",
-    },
-  ];
-
-  const model: Model = {
-    paramValues: [
-      {
-        paramId: 1,
-        value: "повседневное",
-      },
-      {
-        paramId: 2,
-        value: "макси",
-      },
-    ],
-  };
-
-  return (
-    <div className="App">
-      <ParamEditor params={params} model={model} />
-    </div>
-  );
-};
-
-export default App;
 
 interface Props {
   params: Param[];
@@ -70,7 +34,7 @@ class ParamEditor extends Component<Props, State> {
 
   handleParamChange = (paramId: number, value: string) => {
     const { paramValues } = this.state;
-    const updatedParamValues = paramValues.map((paramValue) => {
+    const updatedParamValues = paramValues.map(paramValue => {
       if (paramValue.paramId === paramId) {
         return { ...paramValue, value };
       }
@@ -89,15 +53,13 @@ class ParamEditor extends Component<Props, State> {
 
     return (
       <div>
-        {params.map((param) => (
+        {params.map(param => (
           <div key={param.id}>
             <label>{param.name}:</label>
             <input
               type="text"
-              value={
-                paramValues.find((p) => p.paramId === param.id)?.value || ""
-              }
-              onChange={(e) => this.handleParamChange(param.id, e.target.value)}
+              value={paramValues.find(p => p.paramId === param.id)?.value || ''}
+              onChange={e => this.handleParamChange(param.id, e.target.value)}
             />
           </div>
         ))}
@@ -106,3 +68,5 @@ class ParamEditor extends Component<Props, State> {
     );
   }
 }
+
+export default ParamEditor;
